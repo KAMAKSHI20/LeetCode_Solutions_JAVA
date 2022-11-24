@@ -1,0 +1,20 @@
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        
+        int n=nums.length; //length of array
+        int wind_start=0;  //starting window pointer
+        int wind_end=0;    //end of window pointer
+        int wind_sum=0;   //sum of elements in the current window
+        double avg=Double.NEGATIVE_INFINITY;    //keeps track of the max available average in the given window
+        
+        for(; wind_end<n; wind_end++){
+            wind_sum+=nums[wind_end];  //calculating sum of the window elements
+            if(wind_end>=k-1){
+                avg=Math.max(avg,(wind_sum*1.0/k));  // storing the max avg
+                wind_sum-=nums[wind_start];    // deleting the start of the window inorder to move the window ahead by one
+                wind_start++;   //starting the window by next position
+            }
+        }
+        return avg;
+    }
+}
